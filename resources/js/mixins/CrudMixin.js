@@ -1,12 +1,11 @@
 import Progress from '../components/Progress'
 import {mapActions, mapGetters} from 'vuex'
 import middleware from './middleware'
-
 export default {
     data(){
         return {
             data : [],
-            page: null,
+            page: 1,
             lengthpage: null,
             loading:true,
             keyword:'',
@@ -28,8 +27,9 @@ export default {
         }),
 
         // method ambil data
-        async go(){
+        async go(page = 1){
             let url = this.url
+            this.page = page
             if(this.page > 1) {
                 url = url + '?page=' +this.page + "&keyword=" + this.keyword
             }else{
@@ -38,8 +38,8 @@ export default {
             await this.axios.get(url,this.config)
             .then((ress)=>{
                 this.data = ress.data.data
-                this.page = ress.data.current_page
-                this.lengthpage = ress.data.last_page
+                this.page = ress.data.current_page ? ress.data.current_page : ress.data.meta.current_page
+                this.lengthpage = ress.data.last_page ? ress.data.last_page : ress.data.meta.last_page
             })
             .catch((err)=>{
                 console.log(err.response)
@@ -59,9 +59,8 @@ export default {
             let url = this.url + `/${this.idDelete}`
             this.axios.delete(url,this.config)
             .then((ress) => {
-                console.log(ress)
                 this.setSnakbar({
-                    color:'success',
+                    color_snakbar:'success',
                     pesan:ress.data.message,
                     status:true
                 })

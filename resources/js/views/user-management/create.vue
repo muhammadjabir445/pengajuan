@@ -1,9 +1,10 @@
 <template>
     <v-app>
         <v-container>
-            <v-btn small color="red accent-4" class="white--text" tile>Tambah User</v-btn>
+            <BtnJudul text="Tambah User"/>
+
             <v-card
-            class="border-edit"
+            :style="border"
             tile
             >
                 <!-- <v-card-text class="text-center"> -->
@@ -105,21 +106,21 @@ export default {
                 this.setSnakbar({
                     status:true,
                     pesan:ress.data.message,
-                    color:'success'
+                    color_snakbar:'success'
                 })
                 this.$router.push(url)
             })
             .catch((err)=>{
                 if (err.response.status == 400 ) {
                     this.setSnakbar({
-                    color:'red',
+                    color_snakbar:'red',
                     status:true,
                     pesan:err.response.data.message,
                     })
                 }else{
                     this.setSnakbar({
                     status:true,
-                    color:'red',
+                    color_snakbar:'red',
                     pesan:"Terjadi Kesalahan",
                     })
                 }

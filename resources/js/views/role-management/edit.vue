@@ -1,9 +1,9 @@
 <template>
     <v-app>
         <v-container >
-            <v-btn small color="red accent-4" class="white--text" tile>{{role}}</v-btn>
+            <BtnJudul :text="role"/>
             <v-card
-            class="border-edit"
+            :style="border"
             tile
             >
                 <v-card-text>
@@ -144,7 +144,7 @@ export default {
                 // console.log(ress)
                 this.setSnakbar({
                     pesan:ress.data.message,
-                    color:'success',
+                    color_snakbar:'success',
                     status : true,
                 })
                 this.me()

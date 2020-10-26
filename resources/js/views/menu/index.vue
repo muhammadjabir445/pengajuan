@@ -2,9 +2,9 @@
     <v-app>
         <Progress v-if="loading"/>
         <v-container v-if="!loading">
-            <v-btn small color="red accent-4" class="white--text" tile>Menu Management</v-btn>
+            <BtnJudul text="Data Menu"/>
             <v-card
-            class="border-edit"
+            :style="border"
             tile
             >
                 <v-card-text class="text-center">
@@ -17,7 +17,7 @@
                                 v-model="keyword"
                                 label="Pencarian"
                                 v-on:keyup = "go"
-                                color="red accent-4"
+                                  :color="color"
                             ></v-text-field>
                             </v-col>
 
@@ -67,15 +67,7 @@
                         </template>
                     </v-simple-table>
                 </v-card-text>
-                <div class="text-center">
-                    <v-pagination
-                    v-model="page"
-                    :length="lengthpage"
-                    :total-visible="7"
-                    @input="go"
-                    color="red accent-4"
-                    ></v-pagination>
-                </div>
+                <PaginateComponent :page="page" :lengthpage="lengthpage" v-on:go="go"/>
                 <v-card-actions class="">
 
                 </v-card-actions>

@@ -2,9 +2,9 @@
     <v-app>
         <Progress v-if="loading"/>
         <v-container v-if="!loading">
-            <v-btn small color="red accent-4" class="white--text" tile>Master Data</v-btn>
+            <BtnJudul text="Master Data"/>
             <v-card
-            class="border-edit"
+            :style="border"
             tile
             >
                 <v-card-text class="text-center">
@@ -17,7 +17,7 @@
                                 v-model="keyword"
                                 label="Pencarian"
                                 v-on:keyup = "go"
-                                color="red accent-4"
+                                :color="color"
                             ></v-text-field>
                             </v-col>
 
@@ -41,16 +41,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- <tr v-for="item in desserts" :key="item.name">
-                            <td>{{ item.name }}</td>
-                            <td>{{ item.calories }}</td>
-                            </tr> -->
                             <tr v-for="item in data" :key="item.id">
                                 <td class="text-left">{{item.description}}</td>
                                 <td class="text-left" width="30%">
-                                <!-- <v-btn color="info" fab x-small dark >
-                                    <v-icon>remove_red_eye</v-icon>
-                                </v-btn> -->
                                 <v-btn color="success" v-on:click="edit(item.id)" fab x-small dark >
                                     <v-icon>mdi-circle-edit-outline</v-icon>
                                 </v-btn>
@@ -63,15 +56,7 @@
                         </template>
                     </v-simple-table>
                 </v-card-text>
-                <div class="text-center">
-                    <v-pagination
-                    v-model="page"
-                    :length="lengthpage"
-                    :total-visible="7"
-                    @input="go"
-                    color="red accent-4"
-                    ></v-pagination>
-                </div>
+                <PaginateComponent :page="page" :lengthpage="lengthpage" v-on:go="go()"/>
                 <v-card-actions class="">
 
                 </v-card-actions>
@@ -83,11 +68,6 @@
             >
             <v-card>
                 <v-card-title class="headline">Apa anda yakin menghapus ?</v-card-title>
-<!--
-                <v-card-text>
-                Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
-                </v-card-text> -->
-
                 <v-card-actions>
                 <v-spacer></v-spacer>
 
@@ -118,7 +98,8 @@
 import CrudMixin from '../../mixins/CrudMixin'
 export default {
     name: 'masterdata',
-    mixins:[CrudMixin]
+    mixins:[CrudMixin],
+
 }
 </script>
 

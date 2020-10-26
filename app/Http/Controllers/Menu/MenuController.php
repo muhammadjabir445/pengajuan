@@ -84,6 +84,7 @@ class MenuController extends Controller
                 $status = 200;
             }
         } catch (\Exception $e) {
+            DB::rollback();
             $message = $e->getMessage();
             $status = 500;
         }

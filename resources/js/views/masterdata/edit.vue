@@ -1,8 +1,7 @@
 <template>
     <v-app>
-
         <v-container>
-            <v-btn small color="red accent-4" class="white--text" tile>Edit Master Data</v-btn>
+              <BtnJudul text="Edit Master Data"/>
             <v-card
             class="border-edit"
             tile
@@ -110,7 +109,7 @@ export default {
             await this.axios.post(url,data,this.config)
             .then((ress) =>{
                 this.setSnakbar({
-                    color:'success',
+                    color_snakbar:'success',
                     pesan: ress.data.message,
                     status: true
                 })

@@ -4,17 +4,22 @@
       v-model="statusSnakbar"
       :timeout="2000"
       top
-      :color="color"
+      :color="color_snakbar"
     >
       {{ pesan }}
-      <v-btn
-        class="text-white"
-        text
-        @click="close()"
-      >
-        Close
-      </v-btn>
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+           class="text-white"
+            text
+            @click="close()"
+            v-bind="attrs"
+        >
+          Close
+        </v-btn>
+      </template>
     </v-snackbar>
+
   </div>
 </template>
 <script>
@@ -24,7 +29,7 @@ export default {
     computed :{
         ...mapGetters({
             status : 'snakbar/status',
-            color : 'snakbar/color',
+            color_snakbar : 'snakbar/color_snakbar',
             pesan : 'snakbar/pesan',
         }),
         statusSnakbar: {
@@ -33,7 +38,7 @@ export default {
             },
             set(value){
                 this.setSnakbar({
-                    color:'red',
+                    color_snakbar:'red',
                     status:false,
                     pesan:null
                 })

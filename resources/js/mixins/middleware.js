@@ -1,5 +1,6 @@
 
 import {mapActions, mapGetters} from 'vuex'
+import ThemesMixins from './Themes'
 export default {
     data(){
         return {
@@ -7,14 +8,14 @@ export default {
         }
     },
 
-    mounted() {
-
-    },
+    mixins:[ThemesMixins],
 
     computed: {
         ...mapGetters({
-            token:'auth/token'
-        })
+            token:'auth/token',
+
+        }),
+
     },
 
     created(){
@@ -23,5 +24,8 @@ export default {
                 'Authorization': 'Bearer ' + this.token,
             }
         }
+    },
+    components:{
+
     }
 }

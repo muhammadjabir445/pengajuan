@@ -16,9 +16,6 @@
 
  <style>
 
-    .border-edit{
-    border-top: 2px solid #D50000 !important;
-    }
     .v-application--is-ltr .v-list-item__action:first-child, .v-application--is-ltr .v-list-item__icon:first-child{
         margin-right: 15px !important;
     }

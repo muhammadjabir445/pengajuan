@@ -7,7 +7,9 @@ import UserRouter from './routes/users'
 import MasterDataRouter from './routes/Masterdata'
 import MenuRouter from './routes/Menu'
 import RoleManagementRouter from './routes/RoleManagement'
-
+import BarangRouter from './routes/Barang'
+import PengajuanRouter from './routes/Pengajuan'
+import PengajuanParentRouter from './routes/ParentPengajuan'
 // import Vuetify from 'vuetify'
 // Vue.use(Vuetify)
 import './plugins/vuetify.js'
@@ -32,7 +34,16 @@ const router = new Router({
             MasterDataRouter,
             MenuRouter,
             RoleManagementRouter,
+            BarangRouter,
+            PengajuanRouter,
+            PengajuanParentRouter,
+            {
+                path: '/color',
+                name: 'color',
+                component:()=>import('./views/setting/color.vue'),
+                meta:{auth:true}
 
+            },
         ]
 
     },

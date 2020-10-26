@@ -2,13 +2,13 @@ export default {
     namespaced:true,
     state : {
         status : false,
-        color : 'red',
+        color_snakbar : 'red',
         pesan : ''
     },
     mutations : {
         setSnakbar : (state , payload) => {
             state.status = payload.status,
-            state.color = payload.color,
+            state.color_snakbar = payload.color_snakbar,
             state.pesan = payload.pesan
         },
 
@@ -23,7 +23,7 @@ export default {
 
     getters : {
         status : state => state.status,
-        color : state => state.color,
+        color_snakbar : state => state.color_snakbar,
         pesan : state => state.pesan,
     }
 }

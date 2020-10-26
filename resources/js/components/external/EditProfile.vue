@@ -8,7 +8,8 @@
       tile
       >
         <v-card-title
-          class="red darken-4 white--text"
+          class="white--text"
+          :style="backgroundColor"
           primary-title
         >
           Edit Profile
@@ -106,7 +107,7 @@ import middleware from '../../mixins/middleware'
                })
 
                this.setSnakbar({
-                   color:'success',
+                   color_snakbar:'success',
                    pesan : 'Berhasil Edit Profile',
                    status: true
                })
@@ -143,7 +144,7 @@ import middleware from '../../mixins/middleware'
         passwordConfirmRules(password){
             return v => v === password || 'Harus sama'
         },
-        imgurl:'http://localhost:8000/storage/defaultprofile.jpg',
+        imgurl:'https://buattaspromosi.com/wp-content/uploads/2019/10/about-me.png',
         foto:null
 
    }),
@@ -153,6 +154,10 @@ import middleware from '../../mixins/middleware'
            dialog:'dialog/dialog',
            user:'auth/user'
        }),
+
+       backgroundColor(){
+           return `background-color:${this.color}`
+       },
 
        DataDialog : {
            get(){

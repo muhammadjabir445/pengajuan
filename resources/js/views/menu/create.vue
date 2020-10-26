@@ -1,9 +1,9 @@
 <template>
     <v-app>
         <v-container>
-            <v-btn small color="red accent-4" class="white--text" tile>Tambah Menu</v-btn>
+            <BtnJudul text="Tambah Menu"/>
             <v-card
-            class="border-edit"
+            :style="border"
             tile
             >
                 <!-- <v-card-text class="text-center"> -->
@@ -175,7 +175,7 @@ export default {
             .then((ress)=>{
                 this.setSnakbar({
                     status:true,
-                    color:'success',
+                    color_snakbar:'success',
                     pesan:ress.data.message
                 })
                 this.$router.push('/menu')

@@ -1,9 +1,9 @@
 <template>
     <v-app>
         <v-container>
-            <v-btn small color="red accent-4" class="white--text" tile>Tambah Master Data</v-btn>
+            <BtnJudul text="Tambah Master Data"/>
             <v-card
-            class="border-edit"
+            :style="border"
             tile
             >
                 <!-- <v-card-text class="text-center"> -->
@@ -83,11 +83,11 @@
 </template>
 <script>
 // import {mapActions} from 'vuex'
+
 import MasterdataMixin from '../../mixins/MasterdataMixin'
 import middleware from '../../mixins/middleware'
 export default {
     name: 'masterdata.edit',
-
     mixins:[MasterdataMixin,middleware],
     methods:{
         async save(){
@@ -105,7 +105,7 @@ export default {
                 this.setSnakbar({
                     status:true,
                     pesan:ress.data.message,
-                    color:'success'
+                    color_snakbar:'success'
                 })
                 this.$router.push(url)
             })

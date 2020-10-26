@@ -114,7 +114,7 @@ export default {
             })
             .catch((err) =>{
                 this.setSnakbar({
-                    color:'red',
+                    color_snakbar:'red',
                     pesan : 'Email atau Password salah',
                     status : true
                 })

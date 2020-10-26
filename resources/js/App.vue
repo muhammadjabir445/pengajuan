@@ -62,9 +62,20 @@ export default {
 
     methods:{
         ...mapActions({
-            setAuth: 'auth/setAuth'
+            setAuth: 'auth/setAuth',
+            setColor: 'color/setColor'
         })
     },
+
+    async created() {
+        await this.axios.get('/setting-color')
+        .then(ress => {
+            this.setColor(ress.data.color)
+        })
+        .catch(err=> {
+
+        })
+    }
 
 
 

@@ -2,12 +2,20 @@
 	<div class="text-center mx-auto">
 	<v-progress-circular
 	  indeterminate
-	  color="red accent-4"
+	  :color="color"
 	  :size="200"
       class="mx-auto"
 	></v-progress-circular>
 </div>
 </template>
+
+<script>
+import ThemesMixins from '../mixins/Themes'
+export default {
+    name:'prgoraees',
+    mixins:[ThemesMixins]
+}
+</script>
 <style scoped>
   .v-progress-circular{
   	margin: 1rem;
@@ -22,7 +30,3 @@
      text-align: center !important;
  }
 </style>
-<script>
-export default {
-
-}

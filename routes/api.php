@@ -21,13 +21,21 @@ Route::post('/register', 'AuthJWT\AuthController@register');
 Route::post('/login', 'AuthJWT\AuthController@login');
 Route::post('/logout', 'AuthJWT\AuthController@logout');
 Route::post('/edit-profile','AuthJWT\AuthController@EditProfile');
+Route::get('/setting-color','Setting\SettingController@color');
 
 
 Route::middleware(['auth:api'])->group(function () {
 Route::get('/role-management','Role\RoleManagementController@index');
 Route::post('/role-management','Role\RoleManagementController@store');
 Route::get('/role-management/{id}/edit','Role\RoleManagementController@edit');
+Route::post('pengajuan/{id}/status', 'Pengajuan\PengajuanController@changeStatus');
+Route::post('pengajuan/{id}/saran', 'Pengajuan\PengajuanController@saran');
 Route::resource('masterdata', 'Masterdata\MasterdataController');
 Route::resource('menu', 'Menu\MenuController');
 Route::resource('users', 'Users\UsersController');
+Route::resource('barang', 'Barang\BarangController');
+Route::resource('pengajuan', 'Pengajuan\PengajuanController');
+Route::resource('pengajuan-parent', 'Pengajuan\ParentPengajuanController');
+
+
 });
