@@ -13,7 +13,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+         'App\Models\Inventori' => 'App\Policies\InventoriPolicy',
+         'App\Models\Barang' => 'App\Policies\BarangPolicy',
     ];
 
     /**
@@ -40,6 +41,13 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('update-pengajuan',function($user,$pengajuan) {
             return $user->id == $pengajuan->created_by && $pengajuan->status_pengajuan == 0;
+        });
+
+        Gate::define('pembelian-input', function($user) {
+            return $user->id_role == 37 || $user->id_role == 23 || $user->id_role == 36;
+        });
+        Gate::define('edit-profile',function($user,$edit_user) {
+            return $user->id === $edit_user->id;
         });
     }
 }

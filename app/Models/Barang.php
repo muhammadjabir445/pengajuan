@@ -11,5 +11,9 @@ class Barang extends Model
     public function satuan_barang(){
         return $this->belongsTo('App\Models\MasterDataDetail','satuan');
     }
+
+    public function inventori(){
+        return $this->hasMany('App\Models\Inventori','id_barang');
+    }
     //
 }

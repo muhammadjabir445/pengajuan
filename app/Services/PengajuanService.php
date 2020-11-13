@@ -67,7 +67,7 @@ Class PengajuanService{
         if(Gate::allows('update-pengajuan',$pengajuan)) {
                 $pengajuan->delete();
 
-                $message = 'Berhasil Edit Pengajuan';
+                $message = 'Berhasil Hapus Pengajuan';
                     $status = 200;
 
         } else {

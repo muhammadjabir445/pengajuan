@@ -6,13 +6,13 @@
             <Header  />
             <Sidebar  />
         </div>
-        <v-content class="">
+        <v-main class="">
         <v-container fluid grid-list-md text-xs-center >
             <v-slide-y-transition mode="out-in">
             <router-view></router-view>
             </v-slide-y-transition>
         </v-container>
-        </v-content>
+        </v-main>
     </v-app>
 
     <v-app v-else-if="$route.name == 'login'" height="100%">
@@ -55,8 +55,6 @@ export default {
      computed:{
         ...mapGetters({
             user : 'auth/user',
-            // dialog : 'statusDialog/dialog',
-            // currentComponent : 'component/current'
         })
     },
 
@@ -76,52 +74,5 @@ export default {
 
         })
     }
-
-
-
-    // async beforeCreate(){
-    //     let token = localStorage.getItem('token')
-
-    //     console.log(token)
-    //     let config = {
-    //         headers: {
-    //         'Authorization': 'Bearer ' + token,
-    //         }
-    //     }
-    //     if (token != null) {
-    //     await this.axios.get('/me',config)
-    //         .then((ress) =>{
-    //             console.log(ress)
-    //             this.setAuth({
-    //                 user: ress.data.user,
-    //                 token : ress.data.access_token,
-    //                 menu : ress.data.menu
-    //             })
-    //             this.$router.push('/dahsboard')
-    //         }
-    //             )
-    //         .catch((err) =>console.log(err))
-    //     }
-
-    //     console.log(this.user)
-
-    // }
-//   components: {
-//   'c-header': CHeader,
-//   	Sidebar,
-//     CAlert: () => import('./components/CAlert.vue'),
-//     CUusers: () => import('./components/CUusers.vue'),
-//     CUcategory: () => import('./components/CUcategory.vue'),
-//     CUcostumer: () => import('./components/CUcostumer.vue'),
-//     CUsupplier: () => import('./components/CUsupplier.vue'),
-//     CUbarang: () => import('./components/CUbarang.vue'),
-//   },
-
-//   computed:{
-//     ...mapGetters({
-//        statusDialog: 'dialog/statusDialog',
-//        currentComponent: 'dialog/currentComponent',
-//     })
-//   }
 }
 </script>

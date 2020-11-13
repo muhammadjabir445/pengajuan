@@ -37,13 +37,15 @@
                         <template v-slot:default>
                         <thead>
                             <tr>
+                            <th class="text-left">No</th>
                             <th class="text-left">Nama</th>
                             <th class="text-left">Satuan</th>
                             <th class="text-left">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in data" :key="item.id">
+                            <tr v-for="(item,index) in data" :key="item.id">
+                                <td class="text-left">{{++index}}</td>
                                 <td class="text-left">{{item.nama}}</td>
                                 <td class="text-left">{{item.satuan}}</td>
                                 <td class="text-left">

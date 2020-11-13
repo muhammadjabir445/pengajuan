@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\pengajuan\ParentPengajuan as PengajuanParentPengajuan;
 use App\Http\Resources\pengajuan\ParentPengajuanCollection;
 use App\Models\ParentPengajuan;
+use App\Models\Pengajuan;
 use App\Services\ParentPengajuanService;
 use Illuminate\Http\Request;
 
@@ -83,9 +84,26 @@ class ParentPengajuanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
-        return ParentPengajuanService::changeStatus($id,$request->status);
+        $pengajuan = '';
+        if ($request->status == 3) {
+            $pengajuan = Pengajuan::where('id_parent',$id)->where('status_pengajuan',1)->first();
+
+        } else if($request->status == 2) {
+            $pengajuan = Pengajuan::where('id_parent',$id)->where('status_pengajuan',0)->first();
+        }
+
+        if ($pengajuan) {
+            return response()->json([
+                'message' => "Masih ada barang yang belum dikonfimasi"
+            ],500);
+        } else {
+            return ParentPengajuanService::changeStatus($id,$request->status);
+        }
+
+
     }
 
     /**

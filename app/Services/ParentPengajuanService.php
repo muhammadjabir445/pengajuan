@@ -5,7 +5,10 @@ use App\Helpers\GlobalFunction;
 use App\Models\Barang;
 use App\Models\MasterDataDetail;
 use App\Models\ParentPengajuan;
+use App\Models\Pembelian;
+use App\Models\PembelianDetail;
 use App\Models\Pengajuan;
+use DB;
 
 Class ParentPengajuanService{
     public static function store($request) {
@@ -48,11 +51,53 @@ Class ParentPengajuanService{
     }
 
     public static function changeStatus($id,$status) {
-        $pengajuan = ParentPengajuan::findOrFail($id);
-        $pengajuan->status = $status;
-        $pengajuan->save();
+
+        try {
+            DB::beginTransaction();
+            $error = 0;
+            $pengajuan = ParentPengajuan::findOrFail($id);
+            $pengajuan->status = $status;
+
+
+            if ($status == 3) {
+                $detailPengajuan = Pengajuan::where('id_parent',$pengajuan->id)->where('status_pengajuan',3)->get();
+                if (count($detailPengajuan) > 0) {
+                    $pembelian = new Pembelian;
+                    $pembelian->nomor_surat = str_replace('PPB','SPB',$pengajuan->nomor_surat);
+                    $pembelian->id_pengajuan = $pengajuan->id;
+                    $pembelian->save();
+                    foreach ($detailPengajuan as $value) {
+                    $detailPembelian = new PembelianDetail;
+                    $detailPembelian->id_barang = $value->id_barang;
+                    $detailPembelian->id_pengajuan = $value->id;
+                    $detailPembelian->id_pembelian = $pembelian->id;
+                        if(!$detailPembelian->save()){
+                            $error++;
+                            throw new \Exception('Gagal Menambah Detail pembelian');
+                            break;
+                        }
+                    }
+                }
+            } else if($status == 2) {
+                $detailPengajuan = Pengajuan::where('id_parent',$pengajuan->id)->where('status_pengajuan',1)->get();
+                if (!$detailPengajuan) {
+                    $pengajuan->status = 3;
+                }
+            }
+            $pengajuan->save();
+            if ($error === 0) {
+                DB::commit();
+                $message ='Berhasil Mengubah Status';
+                $status = 200;
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            $message =$e->getMessage();
+            $status = 500;
+        }
+
         return response()->json([
-            'message' => 'Berhasil Mengubah Status'
-        ],200);
+            'message' => $message
+        ],$status);
     }
 }

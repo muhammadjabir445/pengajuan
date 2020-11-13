@@ -29,14 +29,12 @@ class PengajuanController extends Controller
         $parent = ParentPengajuan::findOrFail($request->id_parent);
         if(Gate::allows('akses-pengajuan',$parent->divisi)) {
             if ($request) {
-
                 $pengajuan = Pengajuan::withjoin()
                 ->where('id_parent',$request->id_parent)
                 ->search($request)
                 ->auth()
                 ->orderBy('created_at','desc')
                 ->paginate(10);
-
             }
             return new PengajuanCollection($pengajuan);
         } else {
@@ -55,7 +53,7 @@ class PengajuanController extends Controller
     public function create(Request $request)
     {
         if ($request->keyword) {
-            $barang = Barang::where('nama','LIKE',"%$request->keyword%")->get();
+            $barang = Barang::where('nama','REGEXP',"^$request->keyword")->get();
         } else {
             $barang = [];
         }
@@ -154,6 +152,7 @@ class PengajuanController extends Controller
 
     public function changeStatus(Request $request, $id) {
         $user = \Auth::user();
+        $pengajuan ='';
         if ($request->status_pengajuan == 'true') {
             $status = $user->id_role == 37 ? 1 : 3;
         } else {

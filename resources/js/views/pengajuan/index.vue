@@ -32,7 +32,7 @@
                                 md="6"
                             >
                                 <v-btn color="primary"  :to="urlcreate" small tile v-if="parent_pengajuan.status == 0 && user.role.description == parent_pengajuan.divisi">
-                                    Input Pengajuan
+                                    Tambah Barang
                                 </v-btn>
                             </v-col>
                         </v-row>
@@ -42,6 +42,7 @@
                         <template v-slot:default>
                         <thead>
                             <tr>
+                            <th class="text-left">No</th>
                             <th class="text-left">Nama Barang</th>
                             <th class="text-left">Tujuan Pengadaan</th>
                             <th class="text-left">Keterangan</th>
@@ -51,7 +52,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in data" :key="item.id">
+                            <tr v-for="(item,index) in data" :key="item.id">
+                                <td class="text-left">{{++index}}</td>
                                 <td class="text-left">{{item.nama_barang}}</td>
                                 <td class="text-left">{{item.tujuan_pengadaan}}</td>
                                 <td class="text-left">{{item.keterangan}}</td>

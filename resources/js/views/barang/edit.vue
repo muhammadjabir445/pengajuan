@@ -111,15 +111,15 @@ export default {
         },
 
         go(){
-         let url = window.location.pathname
-         this.axios.get(url,this.config)
-         .then((ress) => {
-             let barang = ress.data.barang
-             this.nama = barang.nama
-             this.satuan = barang.satuan
-             this.items = ress.data.satuan
-         })
-         .catch((err) => console.log(err.response))
+            let url = window.location.pathname
+            this.axios.get(url,this.config)
+            .then((ress) => {
+                let barang = ress.data.barang
+                this.nama = barang.nama
+                this.satuan = barang.satuan
+                this.items = ress.data.satuan
+            })
+            .catch((err) => console.log(err.response))
         }
 
     },

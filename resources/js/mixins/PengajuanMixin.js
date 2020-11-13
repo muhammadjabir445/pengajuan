@@ -17,7 +17,9 @@ export default {
         ],
         perkiraanRules: [
             v => !!v || 'Harus diisi',
-            v => /^[0-9,]+$/.test(v) || 'Format salah'
+            v => /^[0-9,]+$/.test(v) || 'Format salah',
+            v => v.split(',').join('') <= 100000000 || 'Tidak boleh lebih dari 100 juta'
+
         ],
         numberRule: v  => {
             if (!v == 0 ) return true;

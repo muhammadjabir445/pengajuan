@@ -2,6 +2,8 @@
    <v-dialog
     v-model="dialog"
     width="750"
+    @click:outside="close"
+    @keydown="close"
     >
         <v-card>
             <v-card-title class="" primary-title>Detail Pengajuan</v-card-title>
@@ -88,6 +90,7 @@
 </template>
 
 <script>
+import GlobalMethod from '../../mixins/GlobalMethods'
 export default {
     props:{
         dialog:Boolean,
@@ -100,12 +103,8 @@ export default {
             this.$emit('close',this.dialog)
 
         },
-         formatPrice(value) {
-        let val = (value/1).toFixed(2).replace('.', ',')
-        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-        },
-
-    }
+    },
+    mixins:[GlobalMethod]
 
 
 }

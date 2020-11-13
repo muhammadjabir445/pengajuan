@@ -10,6 +10,9 @@ import RoleManagementRouter from './routes/RoleManagement'
 import BarangRouter from './routes/Barang'
 import PengajuanRouter from './routes/Pengajuan'
 import PengajuanParentRouter from './routes/ParentPengajuan'
+import LantaiRouter from './routes/Lantai'
+import PembelianRouter from './routes/Pembelian'
+import InventoriRouter from './routes/Inventori'
 // import Vuetify from 'vuetify'
 // Vue.use(Vuetify)
 import './plugins/vuetify.js'
@@ -37,6 +40,9 @@ const router = new Router({
             BarangRouter,
             PengajuanRouter,
             PengajuanParentRouter,
+            LantaiRouter,
+            PembelianRouter,
+            InventoriRouter,
             {
                 path: '/color',
                 name: 'color',

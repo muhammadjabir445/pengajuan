@@ -15,7 +15,7 @@ class CreateBarangsTable extends Migration
     {
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
-            $table->string('nama')->index();
+            $table->string('nama',150)->index();
             $table->integer('satuan')->index();
             $table->string('slug')->index();
             $table->softDeletes();

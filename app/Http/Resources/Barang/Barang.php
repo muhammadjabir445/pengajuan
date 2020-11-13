@@ -16,7 +16,8 @@ class Barang extends JsonResource
     {
         return ['id' => $this->id,
                 'nama' => $this->nama,
-                'satuan' => $this->satuan_barang->description
+                'satuan' => $this->satuan_barang->description,
+                'inventori_count' => $this->inventori_count ? $this->inventori_count : ''
                 ];
     }
 }

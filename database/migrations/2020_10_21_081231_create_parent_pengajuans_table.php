@@ -15,11 +15,11 @@ class CreateParentPengajuansTable extends Migration
     {
         Schema::create('parent_pengajuans', function (Blueprint $table) {
             $table->id();
-            $table->string('nomor_surat');
+            $table->string('nomor_surat',150)->index();
             $table->boolean('status')->default(0);
-            $table->integer('divisi');
+            $table->integer('divisi')->divisi();
             $table->date('tanggal_pengajuan');
-            $table->integer('created_by');
+            $table->integer('created_by')->index();
             $table->softDeletes();
             $table->timestamps();
         });

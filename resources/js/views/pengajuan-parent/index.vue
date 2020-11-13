@@ -37,6 +37,7 @@
                         <template v-slot:default>
                         <thead>
                             <tr>
+                            <th class="text-left">No</th>
                             <th class="text-left">Nomor Surat</th>
                             <th class="text-left">Divisi</th>
                             <th class="text-left">Tanggal Pengajuan</th>
@@ -46,7 +47,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in data" :key="item.id">
+                            <tr v-for="(item,index) in data" :key="item.id">
+                                <td class="text-left">{{++index}}</td>
                                 <td class="text-left">{{item.nomor_surat}}</td>
                                 <td class="text-left">{{item.divisi}}</td>
                                 <td class="text-left">{{item.tanggal_pengajuan}}</td>
@@ -78,6 +80,12 @@
                                 </v-btn>
                                 <v-btn color="primary" depressed small @click="changeStatus(item.id,3)" v-if="item.status == 2 && user.id_role == 36" >
                                     Konfirmasi pengajuan
+                                </v-btn>
+                                <v-btn color="error" v-if="(user.id_role == 23 || user.id_role == 37) && item.status == 3" depressed small @click="report(item.id,'pdf',item.nomor_surat)" >
+                                    PDF
+                                </v-btn>
+                                <v-btn color="success" v-if="(user.id_role == 23 || user.id_role == 37) && item.status == 3" depressed small @click="report(item.id,'excel',item.nomor_surat)" >
+                                    Excel
                                 </v-btn>
                                 </td>
                             </tr>
@@ -142,6 +150,7 @@
                     color="success"
                     text
                     @click="confirmStatus()"
+                    :loading="loading_confirm"
                 >
                     Confirm
                 </v-btn>
@@ -159,13 +168,15 @@ import { mapGetters } from 'vuex'
     //  2 telah kirim ke finance
     // 3 telah konfirmasi finance
 import CrudMixin from '../../mixins/CrudMixin'
+import download from 'downloadjs'
 export default {
     name: 'users',
     data() {
         return {
             id_change: '',
             status_change:'',
-            dialog_change:false
+            dialog_change:false,
+            loading_confirm:false
         }
     },
     mixins:[CrudMixin],
@@ -199,12 +210,13 @@ export default {
             this.dialog_change = true
         },
         async confirmStatus(){
+            this.loading_confirm = true
             let data = new FormData()
             data.append('status',this.status_change)
             data.append('_method','PUT')
             await this.axios.post(`pengajuan-parent/${this.id_change}`,data,this.config)
             .then( async (ress) => {
-                 this.setSnakbar({
+                this.setSnakbar({
                     color_snakbar:'success',
                     pesan:ress.data.message,
                     status:true
@@ -212,10 +224,29 @@ export default {
 
                 await this.go()
             })
-            .catch(err => console.log(err.response))
+            .catch(err => {
+                 this.setSnakbar({
+                    color_snakbar:'red',
+                    pesan:err.response.data.message,
+                    status:true
+                })
+
+            })
             this.id_change = ''
             this.dialog_change = false
             this.status_change = ''
+            this.loading_confirm = true
+        },
+        report(id,type,name){
+            const file_type = type == 'pdf' ? type : 'xlsx'
+            this.axios.get(`report-pengajuan/${id}/${type}`,{
+                responseType: 'blob'
+            })
+            .then(ress => {
+                const content = ress.headers['content-type'];
+                download(ress.data, name + `.${file_type}`, content)
+            })
+            .catch(err => console.log(err.response))
         }
     },
     computed:{

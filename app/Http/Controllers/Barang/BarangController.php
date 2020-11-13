@@ -19,7 +19,8 @@ class BarangController extends Controller
     public function index(Request $request)
     {
         if ($request) {
-            $barangs = Barang::with('satuan_barang')->where('nama','LIKE',"%{$request->keyword}%")
+            $barangs = Barang::with('satuan_barang')
+            ->where('nama','LIKE',"%{$request->keyword}%")
                     ->paginate(10);
         }else{
             $barangs = Barang::with('satuan_barang')->paginate(10);

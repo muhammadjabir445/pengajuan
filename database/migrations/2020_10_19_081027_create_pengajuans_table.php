@@ -22,9 +22,9 @@ class CreatePengajuansTable extends Migration
             $table->text('tujuan_pengadaan')->nullable();
             $table->tinyInteger('status_pengajuan')->default(0);
             $table->text('alasan_tolak')->nullable();
-            $table->integer('created_by');
-            $table->integer('id_divisi');
-            $table->integer('id_parent');
+            $table->integer('created_by')->index();
+            $table->integer('id_divisi')->index();
+            $table->integer('id_parent')->index();
             $table->softDeletes();
             $table->timestamps();
         });

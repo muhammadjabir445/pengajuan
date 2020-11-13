@@ -13,6 +13,9 @@ class ParentPengajuan extends Model
     public function detail() {
         return $this->hasMany('App\Models\Pengajuan','id_parent');
     }
+    public function user() {
+        return $this->belongsTo('App\User','created_by');
+    }
     public function divisi_pengajuan() {
         return $this->belongsTo('App\Models\MasterDataDetail','divisi');
     }
