@@ -26,12 +26,19 @@ const router = new Router({
         component:()=>import('./views/index.vue'),
         children:[
             {
+                path: '',
+                redirect: {
+                  name: 'login'
+                }
+            },
+            {
                 path: '/dahsboard',
                 name: 'dashboard',
                 component:()=>import('./views/dahsboard/index.vue'),
                 meta:{auth:true}
 
             },
+
 
             UserRouter,
             MasterDataRouter,
