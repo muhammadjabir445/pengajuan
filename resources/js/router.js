@@ -26,7 +26,7 @@ const router = new Router({
         component:()=>import('./views/index.vue'),
         children:[
             {
-                path: '',
+                path: '/',
                 redirect: {
                   name: 'login'
                 }

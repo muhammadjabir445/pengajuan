@@ -9,7 +9,7 @@
                 <v-col
                 class="d-none d-sm-inline-block col-6"
                 >
-                    <img :src="gambarLogin + 'storage/login.png'" width="100%" alt="">
+                    <img :src="gambarLogin + '/storage/login.png'" width="100%" alt="">
                 </v-col>
 
                 <v-col
@@ -47,7 +47,7 @@
                         <br>
                         <v-btn
                         :disabled="!valid"
-                        color="pink accent-3"
+                        :color="color"
                         class="mr-4 white--text"
                         rounded
                         block
@@ -122,17 +122,19 @@ export default {
             this.loading = false
 
         },
-        gambarLogin() {
-            return document.location.origin
-        }
+
     },
     computed: {
         ...mapGetters({
             user:'auth/user',
             menu: 'auth/menu',
             token : 'auth/token',
-            beforeUrl : 'BeforeUrl/url'
-        })
+            beforeUrl : 'BeforeUrl/url',
+            color: 'color/color'
+        }),
+        gambarLogin() {
+            return document.location.origin
+        }
     },
     async beforeRouteEnter(to, from, next){
         // console.log(to)
