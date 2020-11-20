@@ -36,7 +36,7 @@
 
 
 
-                        <div style="position:relative;width:100%">
+                        <div style="position:relative;width:100%" v-if="user.id_role == 23 || user.id_role == 37">
                         <v-text-field
                         outlined
                         v-model="user"
@@ -122,6 +122,7 @@
 <script>
 // import {mapActions} from 'vuex'
 import InventoriMixin from '../../mixins/Inventori'
+import {mapGetters} from 'vuex'
 export default {
     name: 'masterdata.edit',
     mixins:[InventoriMixin],
@@ -190,6 +191,11 @@ export default {
             .catch((err) => console.log(err.response))
         }
 
+    },
+      computed :{
+        ...mapGetters({
+            user:'auth/user'
+        })
     },
 
     created() {

@@ -24,7 +24,7 @@ class Pembelian extends Model
 
     public function scopeAuth($q) {
         $user = \Auth::user();
-        if ($user->id_role !== 36 || $user->id_role !== 37) {
+        if ($user->id_role !== 36 && $user->id_role !== 37) {
             return $q->whereHas('pengajuan',function($q) use($user) {
                 $q->where('divisi',$user->id_role);
             });

@@ -88,12 +88,13 @@
                         </v-card>
                        </v-col>
                         <v-col cols="12"
-                       md="6"
+                       md="12"
+                       height="350px"
                        >
                         <v-card
                         tile
                         >
-                            <!-- <BarChart :height="350" :chartdata="chartData" :options="options" v-if="loading"/> -->
+                            <BarChart :height="350" :chartdata="chartData" :options="options" v-if="loading"/>
                         </v-card>
                        </v-col>
                    </v-row>
@@ -110,6 +111,7 @@
 <script>
 import middleware from '../../mixins/middleware'
 import store from '../../stores'
+import BarChart from '../../components/external/BarChart'
 export default {
     data() {
         return {
@@ -118,12 +120,34 @@ export default {
             total_divisi:'',
             total_pembelian:'',
             loading:false,
-
+            chartData:
+                {
+                labels:[],
+                    datasets: [
+                        {
+                        label: 'Pengajuan',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        data: []
+                        },
+                    ],
+                },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
 
         }
     },
 
     mixins:[middleware],
+    components:{
+        BarChart
+    },
 
     methods: {
         async go() {
@@ -135,6 +159,12 @@ export default {
                 this.total_pengajuan = data.total_pengajuan
                 this.total_divisi = data.total_divisi
                 this.total_pembelian = data.total_pembelian
+                data.chart_pengajuan.forEach(x => {
+
+                     this.chartData.labels.push(x.divisi)
+
+                     this.chartData.datasets[0].data.push(x.total_pengajuan)
+                });
 
             })
 

@@ -53,10 +53,10 @@
                                     <v-icon>fal fa-bars</v-icon>
                                 </v-btn>
 
-                                 <v-btn color="error" v-if="user.id_role == 23 || user.id_role == 37" depressed small @click="report(item.id,'pdf',item.nomor_surat)" >
+                                 <v-btn color="error" v-if="user.id_role == 23 || user.id_role == 37 || user.id_role == 38" depressed small @click="report(item.id,'pdf',item.nomor_surat)" >
                                     PDF
                                 </v-btn>
-                                <v-btn color="success" v-if="user.id_role == 23 || user.id_role == 37" depressed small @click="report(item.id,'excel',item.nomor_surat)" >
+                                <v-btn color="success" v-if="user.id_role == 23 || user.id_role == 37 || user.id_role == 38" depressed small @click="report(item.id,'excel',item.nomor_surat)" >
                                     Excel
                                 </v-btn>
                                 </td>

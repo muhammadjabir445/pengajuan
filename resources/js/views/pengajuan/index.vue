@@ -211,7 +211,26 @@ export default {
             id_confirm:0,
             parent_pengajuan:{},
             dialog_saran:false,
-            saran_coo:''
+            saran_coo:'',
+            status:'',
+            pilihan_status:[
+                {
+                    value : '',
+                    text:'All'
+                },
+                {
+                    value :1,
+                    text:'Diteruskan ke hrd'
+                },
+                {
+                    value :2,
+                    text:'Diteruskan ke finance'
+                },
+                 {
+                    value :3,
+                    text:'Dikonfirmasi finance'
+                },
+            ]
         }
     },
     methods:{
@@ -253,7 +272,7 @@ export default {
             }else{
                 url = url + "?keyword=" + this.keyword
             }
-            url = url + `&id_parent=${this.$route.params.id_parent}`
+            url = url + `&id_parent=${this.$route.params.id_parent}&status`
             await this.axios.get(url,this.config)
             .then( async (ress)=>{
                 this.data = ress.data.data
