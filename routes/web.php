@@ -28,6 +28,9 @@ Route::get('/test',function(){
     $pdf = PDF::loadView('report.pengajuan');
     return $pdf->download('invoice.pdf');
 });
+Route::get('/',function(){
+    return redirect('/login');
+})->where('any', '.*');
 Route::get('/{any}',function(){
     return view('index');
 })->where('any', '.*');
