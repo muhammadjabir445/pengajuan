@@ -28,7 +28,7 @@ const router = new Router({
             {
                 path: '/dahsboard',
                 name: 'dashboard',
-                component:()=>import('./views/index.vue'),
+                component:()=>import('./views/dahsboard/index.vue'),
                 meta:{auth:true}
 
             },

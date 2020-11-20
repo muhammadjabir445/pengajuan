@@ -9,7 +9,7 @@
                 <v-col
                 class="d-none d-sm-inline-block col-6"
                 >
-                    <img src="http://localhost:8000/storage/login.png" width="100%" alt="">
+                    <img :src="document.location.origin + 'storage/login.png'" width="100%" alt="">
                 </v-col>
 
                 <v-col

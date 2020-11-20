@@ -1,7 +1,7 @@
 <template>
 <div>
 
-<v-navigation-drawer app v-model="drawer" class="light" width="300px">
+<v-navigation-drawer app v-model="drawer" class="light" width="230px">
 	  <v-list-item>
         <v-list-item-avatar>
           <v-img :src="user.foto_profile ? user.foto_profile : 'https://buattaspromosi.com/wp-content/uploads/2019/10/about-me.png'"></v-img>
