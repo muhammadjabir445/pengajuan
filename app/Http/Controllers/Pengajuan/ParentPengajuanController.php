@@ -26,7 +26,8 @@ class ParentPengajuanController extends Controller
         if ($request) {
             $pengajuan = ParentPengajuan::with(['divisi_pengajuan'])
             ->filter($request)
-            ->auth($request)
+            ->auth()
+            ->status($request)
             ->orderBy('created_at','desc')
             ->paginate(10);
         }

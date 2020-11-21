@@ -36,7 +36,7 @@
 
 
 
-                        <div style="position:relative;width:100%" v-if="user.id_role == 23 || user.id_role == 37">
+                        <div style="position:relative;width:100%" >
                         <v-text-field
                         outlined
                         v-model="user"
@@ -45,6 +45,7 @@
                         required
                         @keyup="getUser"
                         style="position:relative"
+
                         >
                         </v-text-field>
                         <div class="list-barang" v-if="users.length > 0">

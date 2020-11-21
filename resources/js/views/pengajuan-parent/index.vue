@@ -12,21 +12,41 @@
                     <v-container>
                         <v-row justify="center" align="center">
                             <v-col
-                                cols="6"
+                                cols="3"
                             >
                             <v-text-field
                                 v-model="keyword"
                                 label="Pencarian"
                                 v-on:keyup = "go"
                                 :color="color"
+                                d-inline-block
                             ></v-text-field>
+
                             </v-col>
+                            <v-col
+                                cols="3"
+                            >
+                            <v-select
+                            v-model="status"
+                            :items="pilihan_status"
+                            label="Status"
+                            item-text="text"
+                            item-value="value"
+                            required
+                                d-inline-block
+
+                            @change="go(page)"
+                            ></v-select>
+
+                            </v-col>
+
+
 
                             <v-col
                                 cols="6"
                                 align="right"
                             >
-                                <v-btn color="primary"  :to="urlcreate" small tile>
+                                <v-btn color="primary"  :to="urlcreate" small tile v-if="user.id_role !== 38">
                                     Input Pengajuan
                                 </v-btn>
                             </v-col>
@@ -176,7 +196,30 @@ export default {
             id_change: '',
             status_change:'',
             dialog_change:false,
-            loading_confirm:false
+            loading_confirm:false,
+            status:'',
+             pilihan_status:[
+                {
+                    value : '',
+                    text:'All'
+                },
+                 {
+                    value : 0,
+                    text:'Dalam Pengimputan'
+                },
+                {
+                    value :1,
+                    text:'Diteruskan ke hrd'
+                },
+                {
+                    value :2,
+                    text:'Diteruskan ke finance'
+                },
+                 {
+                    value :3,
+                    text:'Dikonfirmasi finance'
+                },
+            ]
         }
     },
     mixins:[CrudMixin],
@@ -202,6 +245,26 @@ export default {
             } else if(status == 3 ) {
                  return 'Telah di konfirmasi Finance'
             }
+        },
+        async go(page = 1){
+            let url = this.url
+            this.page = page
+            if(this.page > 1) {
+                url = url + '?page=' +this.page + "&keyword=" + this.keyword
+            }else{
+                url = url + "?keyword=" + this.keyword
+            }
+            url = url +"&status=" + this.status
+            await this.axios.get(url,this.config)
+            .then((ress)=>{
+                this.data = ress.data.data
+                this.page = ress.data.current_page ? ress.data.current_page : ress.data.meta.current_page
+                this.lengthpage = ress.data.last_page ? ress.data.last_page : ress.data.meta.last_page
+            })
+            .catch((err)=>{
+                console.log(err.response)
+            })
+            this.loading = false
         },
 
         changeStatus(id,status) {

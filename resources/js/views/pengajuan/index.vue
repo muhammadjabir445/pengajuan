@@ -213,24 +213,7 @@ export default {
             dialog_saran:false,
             saran_coo:'',
             status:'',
-            pilihan_status:[
-                {
-                    value : '',
-                    text:'All'
-                },
-                {
-                    value :1,
-                    text:'Diteruskan ke hrd'
-                },
-                {
-                    value :2,
-                    text:'Diteruskan ke finance'
-                },
-                 {
-                    value :3,
-                    text:'Dikonfirmasi finance'
-                },
-            ]
+
         }
     },
     methods:{

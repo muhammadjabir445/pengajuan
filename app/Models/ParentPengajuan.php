@@ -37,4 +37,8 @@ class ParentPengajuan extends Model
         }
     }
 
+    public function scopeStatus($q,$request) {
+        return $q->where('status',$request->status);
+    }
+
 }
