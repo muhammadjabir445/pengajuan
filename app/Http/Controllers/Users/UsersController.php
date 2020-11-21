@@ -38,7 +38,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $role = MasterDataDetail::where('id_master_data',5)->get();
+        $role = MasterDataDetail::where('id_master_data',5)->where('id','!=',23)->get();
         return response()->json([
             'roles' => $role
         ]);

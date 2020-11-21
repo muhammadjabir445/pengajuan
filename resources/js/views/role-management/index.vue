@@ -25,7 +25,7 @@
                                 cols="6"
                                 align="right"
                             >
-                                <v-btn color="primary"  @click="$router.push('/masterdata/5/edit')" small tile>
+                                <v-btn color="primary"  @click="$router.push('/masterdata/5/edit')" small tile v-if="user.id_role = 23">
                                     Edit Role
                                 </v-btn>
                             </v-col>

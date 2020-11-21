@@ -15,7 +15,7 @@ class RoleManagementController extends Controller
 
     }
     public function index(){
-        $data = MasterDataDetail::where('id_master_data',5)->paginate(15);
+        $data = MasterDataDetail::where('id_master_data',5)->where('id','!=',23)->paginate(15);
         return $data;
     }
 
@@ -41,7 +41,7 @@ class RoleManagementController extends Controller
 
     public function edit($id){
         $role = MasterDataDetail::with('role_menu')->findOrFail($id);
-        $menu = Menu::with('child_menu')->get();
+        $menu = Menu::with('child_menu')->auth()->get();
         return response()->json([
             'role' => $role->description,
             'menu' => $menu,
