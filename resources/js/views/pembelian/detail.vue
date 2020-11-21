@@ -65,7 +65,7 @@
                                     <v-btn color="primary" v-on:click="openDetail(item.id)"  depressed small >
                                         <v-icon>mdi-clipboard-outline</v-icon>
                                     </v-btn>
-                                <v-btn color="primary" :to="`detail/${item.id}/edit`" depressed small dark >
+                                <v-btn color="primary" :to="`detail/${item.id}/edit`" depressed small dark v-if="user.id_role == 37">
                                     Input
                                 </v-btn>
 
@@ -121,7 +121,7 @@
 import GlobalMethod from '../../mixins/GlobalMethods'
 import CrudMixin from '../../mixins/CrudMixin'
 import DetailPembelian from '../../components/external/DetailPembelian'
-
+import {mapGetters} from 'vuex'
 export default {
     name: 'users',
     mixins:[CrudMixin,GlobalMethod],
@@ -146,6 +146,11 @@ export default {
             this.dialog_detail = false
         }
     },
+    computed:{
+        ...mapGetters({
+            user:'auth/user'
+        })
+    }
 
 }
 </script>
