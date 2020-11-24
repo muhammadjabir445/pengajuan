@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pengajuan extends Model
 {
     use SoftDeletes;
+    protected $appends = ['total_stok'];
     public function user(){
         return $this->belongsTo('App\User','created_by');
     }
@@ -17,6 +19,11 @@ class Pengajuan extends Model
 
     public function divisi() {
         return $this->belongsTo('App\Models\MasterDataDetail','id_divisi');
+    }
+
+    public function getTotalStokAttribute(){
+       $total = Inventori::select(\DB::raw('count(id) as total'))->where('id_barang',$this->id_barang)->first();
+       return $total->total;
     }
 
     public function scopeSearch($query,$request)

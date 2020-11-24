@@ -28,14 +28,14 @@ class PengajuanController extends Controller
     {
         $parent = ParentPengajuan::findOrFail($request->id_parent);
         if(Gate::allows('akses-pengajuan',$parent->divisi)) {
-            if ($request) {
+
                 $pengajuan = Pengajuan::withjoin()
                 ->where('id_parent',$request->id_parent)
                 ->search($request)
                 ->auth()
                 ->orderBy('created_at','desc')
                 ->paginate(10);
-            }
+
             return new PengajuanCollection($pengajuan);
         } else {
             return response()->json([

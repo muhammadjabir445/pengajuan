@@ -15,7 +15,7 @@ export default {
         barangs:[],
         ruangan_filter:[],
         users:[],
-        foto:'',
+        foto_inventori:'',
         imgurl:'',
         nameRules: [
           v => !!v || 'Tidak Boleh Kosong',
@@ -27,7 +27,7 @@ export default {
         }),
 
         getLantaiRuangan(){
-            this.axios.get(window.location.pathname,this.config)
+            this.axios.get('/inventori/create',this.config)
             .then((ress) => {
                 this.lantais = ress.data.lantai
                 this.ruangans = ress.data.ruangan
@@ -75,12 +75,12 @@ export default {
 
         eventChange(event){
             const files = event.target.files
-             this.foto = files[0]
+             this.foto_inventori = files[0]
               const fileReader = new FileReader()
              fileReader.addEventListener('load',()=>{
                  this.imgurl=fileReader.result
              })
-              fileReader.readAsDataURL(this.foto)
+              fileReader.readAsDataURL(this.foto_inventori)
         }
 
     },

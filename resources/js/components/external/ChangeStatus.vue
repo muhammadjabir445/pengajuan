@@ -8,6 +8,14 @@
             <v-card-title class="headline">Konfirmasi Pengajuan</v-card-title>
 
             <v-card-text class="text-center">
+                <v-alert
+                dense
+                outlined
+                type="warning"
+                v-if="detail.total_stok > 0"
+                >
+                    Sudah ada stok barang ini di inventori berjumlah {{detail.total_stok}}
+                </v-alert>
                 <v-btn
                     depressed
                     color="red"
@@ -89,7 +97,8 @@ import middleware from '../../mixins/middleware'
 export default {
     props:{
         dialog:Boolean,
-        id:Number
+        id:Number,
+        detail:Object
     },
     mixins:[middleware],
     data() {

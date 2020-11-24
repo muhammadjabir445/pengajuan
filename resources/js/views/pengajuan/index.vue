@@ -146,7 +146,9 @@
             :dialog="dialogConfirm"
             v-on:close="closeDetail"
             v-on:go="go"
-            :id="id_confirm"/>
+            :id="id_confirm"
+            :detail="detailData"
+            />
 
             <v-dialog
             v-model="dialog_saran"
@@ -295,6 +297,7 @@ export default {
         },
         showConfirm(id) {
             this.id_confirm = id
+            this.detailData = this.data.find(async x => await x.id === id)
             this.dialogConfirm = true
         },
         async get_parent() {

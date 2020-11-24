@@ -44,7 +44,7 @@ class PembelianController extends Controller
     }
 
     public function edit($id){
-        $data = \App\Models\PembelianDetail::with(['pengajuan','barang.satuan_barang'])
+        $data = \App\Models\PembelianDetail::with(['pengajuan','barang.satuan_barang','inventori'])
         ->findOrFail($id);
         return new PembelianDetail($data);
     }

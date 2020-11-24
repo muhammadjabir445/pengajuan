@@ -88,7 +88,7 @@
 
                          <v-text-field
                         outlined
-                        v-model="foto"
+                        v-model="foto_inventori"
                         :rules="nameRules"
                         label="Detail barang"
                         required
@@ -148,7 +148,7 @@ export default {
             data.append('id_lantai',this.id_lantai)
             data.append('id_ruangan',this.id_ruangan)
             data.append('detail',this.detail)
-            data.append('foto',this.foto)
+            data.append('foto',this.foto_inventori)
 
             await this.axios.post(url,data,this.config)
             .then((ress) => {

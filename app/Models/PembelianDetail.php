@@ -13,6 +13,10 @@ class PembelianDetail extends Model
         return $this->belongsTo('App\Models\Pengajuan','id_pengajuan');
     }
 
+    public function inventori(){
+        return $this->hasOne('App\Models\Inventori','id_pembelian');
+    }
+
     public function scopeSearch($q,$request) {
         return $q->whereHas('barang', function($q) use($request) {
             $q->where('nama','LIKE',"%$request->keyword%");

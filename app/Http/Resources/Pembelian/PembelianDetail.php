@@ -22,7 +22,8 @@ class PembelianDetail extends JsonResource
             'satuan_barang' =>$this->barang->satuan_barang->description,
             'harga' => $this->harga,
             'tempat_beli' => $this->tempat_beli,
-            'foto' => $this->foto ? asset('storage/' . $this->foto) : ''
+            'foto' => $this->foto ? asset('storage/' . $this->foto) : '',
+            'inventori' => $this->inventori
         ];
     }
 }

@@ -27,6 +27,7 @@ class Pengajuan extends JsonResource
             'alasan_tolak' => $this->alasan_tolak,
             'tempat_pembelian' => $this->tempat_pembelian,
             'saran_coo' => $this->saran_coo,
+            'total_stok' => $this->total_stok
         ];
     }
 }

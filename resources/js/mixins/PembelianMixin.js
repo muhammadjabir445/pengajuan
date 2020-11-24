@@ -23,7 +23,7 @@ export default {
         ...mapActions({
             setSnakbar: 'snakbar/setSnakbar'
         }),
-        eventChange(event){
+        eventChangePembelian(event){
             const files = event.target.files
             this.foto = files[0]
         },
