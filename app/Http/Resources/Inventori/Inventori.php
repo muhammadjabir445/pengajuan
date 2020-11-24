@@ -21,6 +21,7 @@ class Inventori extends JsonResource
             'ruangan' => $this->ruangan->ruangan,
             'user' => $this->user->name,
             'detail' => $this->detail,
+            'status' => $this->status,
             'foto'=> asset('storage/' .$this->foto)
         ];
     }

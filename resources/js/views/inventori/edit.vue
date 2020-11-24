@@ -85,6 +85,16 @@
                             required
                         ></v-select>
 
+                        <v-select
+                            v-model="status"
+                            :items="status_pilihan"
+
+                            label="Status"
+                            item-text="text"
+                            item-value="value"
+
+                        ></v-select>
+
                         <input type="file" @change="eventChange">
 
                         <v-img :src="imgurl" v-if="imgurl" width="100%" height="300px"/>
@@ -138,6 +148,7 @@ export default {
             data.append('id_lantai',this.id_lantai)
             data.append('id_ruangan',this.id_ruangan)
             data.append('detail',this.detail)
+            data.append('status',this.status)
             data.append('foto',this.foto_inventori)
             data.append('_method','PUT')
 
@@ -179,6 +190,7 @@ export default {
                 let inventori = ress.data.inventori
                 this.barang = inventori.barang
                 this.user = inventori.user
+                 this.status = inventori.status
                 this.lantais = ress.data.lantai
                 this.ruangans = ress.data.ruangan
                 this.detail = inventori.detail

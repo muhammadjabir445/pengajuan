@@ -20,6 +20,17 @@ export default {
         nameRules: [
           v => !!v || 'Tidak Boleh Kosong',
         ],
+        status:'',
+        status_pilihan:[
+            {
+                value:0,
+                text:'Baik'
+            },
+            {
+                value:1,
+                text:'Rusak'
+            }
+        ]
       }),
     methods: {
         ...mapActions({
