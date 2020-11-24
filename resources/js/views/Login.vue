@@ -93,7 +93,8 @@ export default {
     methods : {
         ...mapActions({
             setAuth:'auth/setAuth',
-            setSnakbar:'snakbar/setSnakbar'
+            setSnakbar:'snakbar/setSnakbar',
+            setNotifikasi: 'auth/setNotifikasi'
         }),
 
         async login(){
@@ -109,6 +110,7 @@ export default {
                     token : ress.data.access_token,
                     menu : ress.data.menu
                 })
+                this.setNotifikasi(ress.data.notifikasi)
                 localStorage.setItem('token', this.token);
                 this.$router.push('/dahsboard')
             })
@@ -154,8 +156,9 @@ export default {
                 store.dispatch('auth/setAuth',{
                     user: ress.data.user,
                     token : ress.data.access_token,
-                    menu : ress.data.menu
+                    menu : ress.data.menu,
                 })
+                store.dispatch('auth/setNotifikasi',ress.data.notifikasi)
                 next('login')
             }
                 )

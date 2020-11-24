@@ -27,7 +27,10 @@ Route::get('/report-pengajuan/{id}/pdf','Report\ReportController@pengajuan_pdf')
 Route::get('/report-pembelian/{id}/excel','Report\ReportController@pembelian_excel');
 Route::get('/report-pembelian/{id}/pdf','Report\ReportController@pembelian_pdf');
 Route::get('/dahsboard','Dashboard\DashboardController@index');
+Route::get('/change-status/notifikasi/{id}','Notifikasi\NotifikasiController@change');
+
 Route::resource('inventori', 'Inventori\InventoriController');
+// /change-status/notifikasi/
 Route::middleware(['auth:api'])->group(function () {
 Route::get('/role-management','Role\RoleManagementController@index');
 Route::post('/role-management','Role\RoleManagementController@store');

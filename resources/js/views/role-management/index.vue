@@ -66,9 +66,15 @@
 <script>
 
 import CrudMixin from '../../mixins/CrudMixin'
+import {mapGetters} from 'vuex'
 export default {
     name: 'role-management',
     mixins:[CrudMixin],
+    computed:{
+        ...mapGetters({
+            user:'auth/user'
+        })
+    }
 }
 </script>
 

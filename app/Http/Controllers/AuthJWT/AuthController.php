@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AuthJWT;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\User\User;
 use App\Models\Menu;
+use App\Notifikasi\Notifikasi;
 use App\User as AppUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -103,6 +104,7 @@ class AuthController extends Controller
     protected function respondWithToken($token)
     {
         $user =$this->guard();
+        $notifikasi = Notifikasi::where('id_divisi',$user->id_role)->orderBy('created_at','desc')->limit(10)->get();
         $menu = Menu::with(['child_menu' => function($q) use ($user) {
             $q->whereIn('id',$user->role->role_menu->child);
         }])->whereIn('id',$user->role->role_menu->parent)->orderBy('priority','desc')->get();
@@ -110,6 +112,7 @@ class AuthController extends Controller
             'access_token' => $token,
             'user' => new User($user),
             'menu' => $menu,
+            'notifikasi' => $notifikasi,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);

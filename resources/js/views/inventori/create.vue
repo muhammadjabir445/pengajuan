@@ -16,27 +16,27 @@
                         :lazy-validation="lazy"
                         >
 
-                        <div style="position:relative;width:100%">
-                        <v-text-field
-                        outlined
-                        v-model="barang"
-                        :rules="nameRules"
-                        label="Nama barang"
-                        required
-                        @keyup="get_barang"
-                        style="position:relative"
-                        >
-                        </v-text-field>
-                        <div class="list-barang" v-if="barangs.length > 0">
-                            <ul>
-                                <li v-for="item in barangs" :key="item.id" @click="select_barang(item.nama)">{{item.nama}}</li>
-                            </ul>
-                        </div>
-                        </div>
-
-
-
                         <div style="position:relative;width:100%" >
+                            <v-text-field
+                            outlined
+                            v-model="barang"
+                            :rules="nameRules"
+                            label="Nama barang"
+                            required
+                            @keyup="get_barang"
+                            style="position:relative"
+                            >
+                            </v-text-field>
+                            <div class="list-barang" v-if="barangs.length > 0">
+                                <ul>
+                                    <li v-for="item in barangs" :key="item.id" @click="select_barang(item.nama)">{{item.nama}}</li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+                        <div style="position:relative;width:100%" v-if="user_login.id_role == 23 || user_login.id_role == 37">
                         <v-text-field
                         outlined
                         v-model="user"
@@ -186,7 +186,7 @@ export default {
 
     computed :{
         ...mapGetters({
-            user:'auth/user'
+            user_login:'auth/user'
         })
     },
 

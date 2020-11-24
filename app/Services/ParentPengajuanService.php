@@ -57,10 +57,13 @@ Class ParentPengajuanService{
             $error = 0;
             $pengajuan = ParentPengajuan::findOrFail($id);
             $pengajuan->status = $status;
-
+            $deskripsi = "Pengajuan barang dengan nomor surat <b>$pengajuan->nomor_surat</b> ";
+            $url = '/pengajuan-parent';
 
             if ($status == 3) {
                 $detailPengajuan = Pengajuan::where('id_parent',$pengajuan->id)->where('status_pengajuan',3)->get();
+                NotifikasiService::store($deskripsi . "telah dikonfirmasi finance",$url,$pengajuan->divisi);
+                NotifikasiService::store($deskripsi . "telah dikonfirmasi finance",$url,37);
                 if (count($detailPengajuan) > 0) {
                     $pembelian = new Pembelian;
                     $pembelian->nomor_surat = str_replace('PPB','SPB',$pengajuan->nomor_surat);
@@ -80,9 +83,13 @@ Class ParentPengajuanService{
                 }
             } else if($status == 2) {
                 $detailPengajuan = Pengajuan::where('id_parent',$pengajuan->id)->where('status_pengajuan',1)->get();
+                NotifikasiService::store($deskripsi . "telah diteruskan ke finance oleh hrd",$url,$pengajuan->divisi);
+                NotifikasiService::store("Pengajuan barang baru nomor surat <b>$pengajuan->nomor_surat</b> ",$url,36);
                 if (!$detailPengajuan) {
                     $pengajuan->status = 3;
                 }
+            } else {
+                NotifikasiService::store("Pengajuan barang baru nomor surat <b>$pengajuan->nomor_surat</b> ",$url,37);
             }
             $pengajuan->save();
             if ($error === 0) {
@@ -92,7 +99,7 @@ Class ParentPengajuanService{
             }
         } catch (\Exception $e) {
             DB::rollback();
-            $message =$e->getMessage();
+            $message = $e->getMessage();
             $status = 500;
         }
 

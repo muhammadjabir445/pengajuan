@@ -46,7 +46,7 @@
                                 cols="6"
                                 align="right"
                             >
-                                <v-btn color="primary"  :to="urlcreate" small tile v-if="user.id_role !== 38">
+                                <v-btn color="primary"  :to="urlcreate" small tile v-if="user.id_role !== 36">
                                     Input Pengajuan
                                 </v-btn>
                             </v-col>
