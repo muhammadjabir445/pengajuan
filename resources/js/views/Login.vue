@@ -112,7 +112,12 @@ export default {
                 })
                 this.setNotifikasi(ress.data.notifikasi)
                 localStorage.setItem('token', this.token);
-                this.$router.push('/dahsboard')
+                if(user.id_role == 23 ) {
+                    this.$router.push('/dahsboard')
+                } else {
+                    this.$router.push('/pengajuan-parent')
+                }
+
             })
             .catch((err) =>{
                 this.setSnakbar({
