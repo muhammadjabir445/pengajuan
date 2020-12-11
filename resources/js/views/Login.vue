@@ -103,7 +103,7 @@ export default {
             data.append('email',this.email)
             data.append('password',this.password)
             await this.axios.post('/login',data)
-            .then((ress) => {
+            .then( async (ress) => {
                 console.log(ress)
                 this.setAuth({
                     user: ress.data.user,
@@ -112,10 +112,10 @@ export default {
                 })
                 this.setNotifikasi(ress.data.notifikasi)
                 localStorage.setItem('token', this.token);
-                if(user.id_role == 23 ) {
-                    this.$router.push('/dahsboard')
+                if(ress.data.user.id_role == 23 ) {
+                    await this.$router.push('/dahsboard')
                 } else {
-                    this.$router.push('/pengajuan-parent')
+                    await this.$router.push('/pengajuan-parent')
                 }
 
             })
