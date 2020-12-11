@@ -244,6 +244,7 @@ export default {
         closeDetail(){
             this.dialogDetail = false
              this.dialogConfirm =false
+             this.detailData = {}
         },
         openDetail(id) {
             this.dialogDetail = true
@@ -295,9 +296,9 @@ export default {
                 })
             })
         },
-        showConfirm(id) {
+        async showConfirm(id) {
             this.id_confirm = id
-            this.detailData = this.data.find(async x => await x.id === id)
+            this.detailData = await this.data.find( x => x.id === id)
             this.dialogConfirm = true
         },
         async get_parent() {

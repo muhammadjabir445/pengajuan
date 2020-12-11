@@ -3,6 +3,8 @@
     <v-dialog
     v-model="dialog"
     width="450"
+    @click:outside="close"
+    @keydown="close"
     >
         <v-card>
             <v-card-title class="headline">Konfirmasi Pengajuan</v-card-title>
@@ -12,7 +14,7 @@
                 dense
                 outlined
                 type="warning"
-                v-if="detail.total_stok > 0"
+                v-if="detail.total_stok > 0 && detail.total_stok"
                 >
                     Sudah ada stok barang ini di inventori berjumlah {{detail.total_stok}}
                 </v-alert>
@@ -111,8 +113,9 @@ export default {
     },
     methods:{
         close() {
-            this.$emit('close',this.dialog)
             this.alasan_tolak = ''
+            this.$emit('close',this.dialog)
+
         },
         ...mapActions({
             setSnakbar:'snakbar/setSnakbar'
@@ -156,6 +159,9 @@ export default {
             this.loading_confirm = false
         }
 
+    },
+    created(){
+        console.log(this.detail)
     }
 
 

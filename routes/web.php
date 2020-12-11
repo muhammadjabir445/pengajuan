@@ -11,22 +11,20 @@
 |
 */
 
+use App\Models\Inventori;
 use App\Models\ParentPengajuan;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Http\Request;
-// use PDF;
-use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
+use App\Models\Pembelian;
+use App\Models\PembelianDetail;
+use App\Models\Pengajuan;
+
 Route::get('/test',function(){
 
-    // $user = \App\User::findOrFail(1);
-    // $user->password = \Hash::make(123456);
-    // $user->save();
-    $data =ParentPengajuan::with(['detail'=>function($q) {
-        return $q->with('barang.satuan_barang')->where('status_pengajuan',3);
-    },'user'])->findOrFail(15);
-    return view('report.pengajuan',compact('data'));
-    $pdf = PDF::loadView('report.pengajuan');
-    return $pdf->download('invoice.pdf');
+    $inventori = Inventori::truncate();
+    $pengajuan = ParentPengajuan::truncate();
+    $pembelian = Pembelian::truncate();
+    $detail_pembelian = PembelianDetail::truncate();
+    $pengajuan_detail = Pengajuan::truncate();
+
 });
 Route::get('/',function(){
     return redirect('/login');
