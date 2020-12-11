@@ -144,7 +144,7 @@ import middleware from '../../mixins/middleware'
         passwordConfirmRules(password){
             return v => v === password || 'Harus sama'
         },
-        imgurl:'https://buattaspromosi.com/wp-content/uploads/2019/10/about-me.png',
+        imgurl:'https://apps.redhunter.id/defaultprofile.jpg',
         foto:null
 
    }),

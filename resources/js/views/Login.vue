@@ -9,7 +9,7 @@
                 <v-col
                 class="d-none d-sm-inline-block col-6"
                 >
-                    <img :src="gambarLogin + '/storage/login.png'" width="100%" alt="">
+                    <img src="https://apps.redhunter.id/login.png" width="100%" alt="">
                 </v-col>
 
                 <v-col
