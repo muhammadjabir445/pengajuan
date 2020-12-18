@@ -2,7 +2,7 @@
     <v-app>
         <Progress v-if="loading"/>
         <v-container v-if="!loading">
-            <BtnJudul text="Data barang"/>
+            <BtnJudul text="Data Lantai dan ruangan"/>
 
             <v-card
              :style="border"
